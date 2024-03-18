@@ -125,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
         print(new_instance.id)
         storage.save()"""
-    
+
     def do_create(self, args):
         """ Create an object of any class"""
         if not args:
