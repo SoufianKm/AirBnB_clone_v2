@@ -8,12 +8,12 @@ from sqlalchemy.orm import relationship
 
 class City(BaseModel, Base):
     """ City class
-    
+
     Attributes:
         __tablename__: the table name cities
         state_id: The state id
         name: The city name
-        places: relationship with the class Place 
+        places: relationship with the class Place
     """
     __tablename__ = 'cities'
 

@@ -9,7 +9,7 @@ from models.city import City
 
 class State(BaseModel, Base):
     """ State class
-    
+
     Attributes:
         __tablename__: Represent table name, states
         name: State name
