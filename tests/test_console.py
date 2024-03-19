@@ -6,7 +6,7 @@ import unittest
 import models
 from io import StringIO
 from unittest.mock import patch
-from models.engine.bd_storage import DBStorage
+from models.engine.db_storage import DBStorage
 from models.engine.file_storage import FileStorage
 from console import HBNBCommand
 
