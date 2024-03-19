@@ -1,10 +1,34 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 import os
-from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Column, Float, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
 from models.review import Review
+from models.amenity import Amenity
+
+
+"""
+instance of SQLAlchemy Table represents
+the relationship `Many-to-Many` between
+Place and Amenity.
+"""
+place_amenity = Table(
+        'place_amenity',
+        Base.metadata,
+        Column(
+            'place_id',
+            String(60),
+            ForeignKey('places.id'),
+            nullable=False,
+            primary_key=True),
+        Column(
+            'amenity_id',
+            String(60),
+            ForeignKey('amenities.id'),
+            nullable=False,
+            primary_key=True)
+)
 
 
 class Place(BaseModel, Base):
@@ -24,6 +48,11 @@ class Place(BaseModel, Base):
         longitude = Column(Float, nullable=True)
         reviews = relationship('Review', cascade="all, delete, \
                 delete-orphan", backref='place')
+        amenities = relationship(
+                'Amenity',
+                secondary=place_amenity,
+                viewonly=False,
+                backref='place_amenities')
     else:
         city_id = ""
         user_id = ""
@@ -45,4 +74,22 @@ class Place(BaseModel, Base):
                 if value.place_id == self.id:
                     place_reviews.append(value)
             return place_reviews
+
+        @property
+        def amenities(self):
+            """Returns the amenities of this Place"""
+            from models import storage
+            amenities_of_place = []
+            for value in storage.all(Amenity).values():
+                if value.id in self.amenity_ids:
+                    amenities_of_place.append(value)
+            return amenities_of_place
+
+        @amenities.setter
+        def amenities(self, value):
+            """Adds an amenity to this Place"""
+            if type(value) is Amenity:
+                if value.id not in self.amenity_ids:
+                    self.amenity_ids.append(value.id)
+
     amenity_ids = []
