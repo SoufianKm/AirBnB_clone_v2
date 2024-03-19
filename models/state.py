@@ -3,13 +3,19 @@
 import os
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-
 from models.base_model import BaseModel, Base
 from models.city import City
 
 
 class State(BaseModel, Base):
-    """ State class """
+    """ State class
+    
+    Attributes:
+        __tablename__: Represent table name, states
+        name: State name
+        cities: represent a relationship with the class City
+    """
+
     __tablename__ = 'states'
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         name = Column(String(128), nullable=False)

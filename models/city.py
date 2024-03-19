@@ -7,7 +7,14 @@ from sqlalchemy.orm import relationship
 
 
 class City(BaseModel, Base):
-    """ The city class, contains state ID and name """
+    """ City class
+    
+    Attributes:
+        __tablename__: the table name cities
+        state_id: The state id
+        name: The city name
+        places: relationship with the class Place 
+    """
     __tablename__ = 'cities'
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
@@ -16,6 +23,6 @@ class City(BaseModel, Base):
         places = relationship('Place', cascade='all, delete, \
                 delete-orphan', backref='cities')
     else:
-        state_id = ""
         name = ""
+        state_id = ""
         places = None

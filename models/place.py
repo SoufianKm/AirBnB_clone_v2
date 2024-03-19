@@ -32,7 +32,24 @@ place_amenity = Table(
 
 
 class Place(BaseModel, Base):
-    """ A place to stay """
+    """ A place to stay
+
+    Attributes:
+        __tablename__: Table name, places
+        city_id: Id of city
+        user_id: Id user
+        name: Place name
+        description: Place description
+        number_rooms: Integer number of room
+        number_bathrooms: Integer number of bathrooms
+        max_guest: Integer maximum guest
+        price_by_night: Integer price by night
+        latitude: Float latitude
+        longitude: Float longitude
+        reviews: represent a relationship with the class Review
+        amenities: represent a relationship with the class Amenity
+        amenity_ids: list of Amenity ids
+    """
     __tablename__ = 'places'
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
