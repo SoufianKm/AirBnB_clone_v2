@@ -15,8 +15,8 @@ class State(BaseModel, Base):
         name: State name
         cities: represent a relationship with the class City
     """
-
     __tablename__ = 'states'
+
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         name = Column(String(128), nullable=False)
         cities = relationship('City', cascade='all, delete,\
