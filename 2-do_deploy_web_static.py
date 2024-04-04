@@ -6,7 +6,7 @@ the function do_deploy:
     Returns False if the file at the path archive_path doesn’t exist
     The script should take the following steps:
         Upload the archive to the /tmp/ directory of the web server.
-        Uncompress the archive to the folder 
+        Uncompress the archive to the folder
         /data/web_static/releases/<archive filename
         without extension> on the web server.
         Delete the archive from the web server.
@@ -41,7 +41,8 @@ def do_deploy(archive_path):
         link = "/data/web_static/current"
         put(archive_path, '/tmp/')
         run('mkdir -p {}{}/'.format(full_path, extract_folder))
-        run('tar -xzf /tmp/{} -C {}{}/'.format(file_name, full_path, extract_folder))
+        run('tar -xzf /tmp/{} -C {}{}/'.format(file_name, full_path,
+            extract_folder))
         run('rm /tmp/{}'.format(file_name))
         run('mv {0}{1}/web_static/* {0}{1}/'.format(full_path, extract_path))
         run('rm -rf {}{}/web_static'.format(full_path, extract_path))
