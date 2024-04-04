@@ -37,7 +37,7 @@ def do_deploy(archive_path):
         # essential file names
         file_name = archive_path.split("/")[-1]
         extract_folder = file_name.split(".")[0]
-        full_path = '{}/{}'.format(destination, extract_folder)
+        full_path = "/data/web_static/releases/"
         link = "/data/web_static/current"
         put(archive_path, '/tmp/')
         run('mkdir -p {}{}/'.format(full_path, extract_folder))
