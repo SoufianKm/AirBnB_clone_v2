@@ -18,7 +18,7 @@ def do_pack():
     ref = 'web_static_' + datetime.now().strftime("%Y%m%d%H%M%S")
     file_name = ref + '.' + 'tgz'
     local('mkdir -p versions')
-    create = local('tar -czvf versions/{} web_static'.format(file_name))
+    create = local('tar -cvzf versions/{} web_static'.format(file_name))
     if create.succeeded:
         return 'versions/{}'.format(file_name)
     else:
