@@ -5,7 +5,7 @@ that creates and distributes an archive to your web
 servers, using the function deploy
 """
 
-from fabric.api import put, run, env, local
+from fabric.api import *
 from datetime import datetime
 from os.path import exists, isdir
 env.hosts = ['54.90.57.18', '35.153.51.85']
