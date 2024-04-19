@@ -40,7 +40,7 @@ class DBStorage:
             objects_list.extend(self.__session.query(Review).all())
             objects_list.extend(self.__session.query(Amenity).all())
         else:
-            if type(cls) == str:
+            if type(cls) is str:
                 cls = eval(cls)
             objects_list = self.__session.query(cls).all()
 
@@ -76,4 +76,4 @@ class DBStorage:
 
     def close(self):
         """close the session"""
-        self.__session.close()
+        self.__session.remove()
