@@ -6,7 +6,7 @@ from datetime import datetime
 from sqlalchemy import Column, String, DATETIME
 from sqlalchemy.ext.declarative import declarative_base
 
-
+time = "%Y-%m-%dT%H:%M:%S.%f"
 Base = declarative_base()
 
 
@@ -26,7 +26,7 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key != '__class__':
                     if key in ('created_at', 'updated_at'):
-                        setattr(self, key, datetime.fromisoformat(value))
+                        setattr(self, key, datetime.strptime(value, time))
                     else:
                         setattr(self, key, value)
             # if os.getenv('HBNB_TYPE_STORAGE') in ('db'):
@@ -51,7 +51,7 @@ class BaseModel:
 
     def to_dict(self):
         """Convert instance into dict format"""
-        dictionary = {}
+        dictionary = self.__dict__.copy()
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
